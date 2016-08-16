@@ -5,8 +5,7 @@ from logging.handlers import RotatingFileHandler
 import socket
 
 app = Flask(__name__)
-redis = Redis(host='redis', port=6379)
-#redis = Redis(host='123.57.14.82', port=9000)
+redis = Redis(host='redis_primary', port=6379)
 
 def writeLog():
     global app
@@ -21,9 +20,9 @@ def writeLog():
 @app.route('/')
 def hello():
     redis.incr('hits')
-    writeLog()
     return '<h1>Hello World! I have been seen %s times(%s).</h1>' % (redis.get('hits'), socket.gethostname())
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
+    writeLog()
 
