@@ -31,7 +31,7 @@ class Solution(object):
 
 
 solution = Solution()
-# print solution.getSum(1, 2)
+print solution.getSum(1, 2)
 # print solution.getSum(32, 15)
 # print solution.getSum(999999999999999, 111111111111111)
 print solution.getSum(-1, 2)
