@@ -20,5 +20,4 @@ class Solution(object):
 solution = Solution()
 print solution.reverseString("hello")
 print solution.reverseString('')
-print solution.reverseString(123)
 
