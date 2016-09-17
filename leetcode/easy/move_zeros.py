@@ -17,9 +17,18 @@ class Solution(object):
         :type nums: List[int]
         :rtype: void Do not return anything, modify nums in-place instead.
         """
+        cnt = nums.count(0)
+        k = 0
+        for i in nums:
+            if 0 != i:
+                nums[k] = i
+                k += 1
+        for i in range(1, cnt + 1):
+            nums[-i] = 0
 
 
 if __name__ == '__main__':
     s = Solution()
     lst = [0, 1, 0, 3, 12]
     s.moveZeroes(lst)
+    print lst
