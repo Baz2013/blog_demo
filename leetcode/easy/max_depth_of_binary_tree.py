@@ -18,15 +18,20 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        rst = 0
 
-        return rst
+        if root is None:
+            return 0
+        max_left = 1 + self.maxDepth(root.left)
+        max_right = 1 + self.maxDepth(root.right)
+
+        return max(max_left, max_right)
 
 
 if __name__ == '__main__':
     bt = TreeNode(1)
     bt.left = TreeNode(2)
     bt.right = TreeNode(3)
+    bt.right.right = TreeNode(5)
 
     s = Solution()
-    s.maxDepth(bt)
+    print s.maxDepth(bt)
