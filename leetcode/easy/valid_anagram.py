@@ -16,6 +16,8 @@
 # Follow up:
 # What if the inputs contain unicode characters? How would you adapt your solution to such case?
 
+# 如果只是顺序边了,而字符没有变是合法的
+
 class Solution(object):
     def isAnagram(self, s, t):
         """
@@ -23,6 +25,11 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
+        lst_s, lst_t = list(s), list(t)
+        lst_s.sort()
+        lst_t.sort()
+
+        return False if ''.join(lst_s) != ''.join(lst_t) else True
 
 
 if __name__ == '__main__':
