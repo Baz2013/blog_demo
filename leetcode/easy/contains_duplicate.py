@@ -8,15 +8,19 @@
 #
 # Subscribe to see which companies asked this question
 
+import collections
+
 class Solution(object):
     def containsDuplicate(self, nums):
         """
         :type nums: List[int]
         :rtype: bool
         """
-        num_str = ''.join([str(i) for i in nums])
-        for char in num_str:
-            if num_str.rfind(char) != num_str.find(char):
+        dict_nums = collections.Counter(nums)
+        # print dict_nums
+
+        for item in dict_nums.items():
+            if item[1] > 1:
                 return True
 
         return False
