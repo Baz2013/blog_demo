@@ -14,6 +14,7 @@ class ListNode(object):
         self.val = x
         self.next = None
 
+
 class Solution(object):
     def deleteNode(self, node):
         """
@@ -21,9 +22,16 @@ class Solution(object):
         :rtype: void Do not return anything, modify node in-place instead.
         """
 
+        node.val = node.next.val
+        node.next = node.next.next
+
+
 if __name__ == '__main__':
     head = ListNode(1)
     head.next = ListNode(2)
+    # head.next.next = ListNode(3)
+    # head.next.next.next = ListNode(4)
 
     s = Solution()
     s.deleteNode(head)
+    print head.val
