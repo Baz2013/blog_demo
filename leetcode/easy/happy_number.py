@@ -13,9 +13,11 @@
 #
 # Example: 19 is a happy number
 
-import time
+# this looks more similar to Linked List Cycle
+# 使用快慢指针判断
+
 class Solution(object):
-    def split_number(self,n):
+    def next_number(self, n):
         """
         :param n:
         :return:
@@ -24,28 +26,25 @@ class Solution(object):
         while n > 9:
             t = n % 10
             rst.append(t)
-            n = n / 10
+            n /= 10
+
         rst.append(n)
 
-        return rst
+        return sum([x ** 2 for x in rst])
 
     def isHappy(self, n):
         """
         :type n: int
         :rtype: bool
         """
-        nums = self.split_number(n)
-        t = sum([x**2 for x in nums])
-        p = sum([x**2 for x in self.split_number(t)])
+        slow = n
+        fast = self.next_number(n)
 
-        while t != p:
-            t = sum([x**2 for x in self.split_number(p)])
-            p = sum([x**2 for x in self.split_number(p)])
-            p = sum([x**2 for x in self.split_number(p)])
-            print t
+        while slow != fast:
+            slow = self.next_number(slow)
+            fast = self.next_number(self.next_number(fast))
 
-        return True if 1 == p else False
-
+        return 1 == slow
 
 
 if __name__ == '__main__':
