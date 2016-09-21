@@ -17,7 +17,7 @@
 # * 那么都记录下来，且每次都从num中除去该因子，从而每次得到的因子必定是质因子。
 # * 因为合数因子本身必定可以写成若干个质数因子之积，而我们是从最小的质数开始寻找， 所以如果能被num整除，则一定是质因子。
 # * * 比如num=12，其因子有1、2、3、4、6、12，其中质因子有2和3 由于4=2*2 ，6=2*3，所以当i=4或6时，num%i != 0 * */
-
+# from http://www.voidcn.com/blog/roamer_nuptgczx/article/p-6146386.html
 
 class Solution(object):
     def isUgly(self, num):
