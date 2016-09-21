@@ -25,7 +25,7 @@ class Solution(object):
         :type num: int
         :rtype: bool
         """
-        print num,
+        # print num,
         if num < 1:
             return False
         prime_factor = list()
@@ -34,7 +34,7 @@ class Solution(object):
             prime_factor.append(2)
             num /= 2
 
-        i = 3L
+        i = 3
         while i < num + 1:
             flag = True
             while 0 == num % i:
