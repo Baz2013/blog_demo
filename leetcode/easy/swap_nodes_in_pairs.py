@@ -16,13 +16,45 @@
 #         self.val = x
 #         self.next = None
 
+import common.link_list as ll
+
+
 class Solution(object):
     def swapPairs(self, head):
         """
         :type head: ListNode
         :rtype: ListNode
         """
+        if head is None:
+            return
+
+        p = head
+        q = head.next
+        new_head = head.next
+
+        while p is not None and q is not None:
+            p.next = q.next
+            q.next = p
+            p = p.next
+            q = p.next
+        print new_head.val
+        return new_head
+
 
 if __name__ == '__main__':
     s = Solution()
-    # s.swapPairs()
+
+    head = ll.creat_link([1, 2])
+    # ll.travel_link(head)
+    head1 = s.swapPairs(head)
+    ll.travel_link(head1)
+
+    head = ll.creat_link([1, 2, 3])
+    # ll.travel_link(head)
+    head1 = s.swapPairs(head)
+    ll.travel_link(head1)
+
+    headead = ll.creat_link([1, 2, 3, 4, 5, 6, 7])
+    # ll.travel_link(head)
+    head1 = s.swapPairs(head)
+    ll.travel_link(head1)
