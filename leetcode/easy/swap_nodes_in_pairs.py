@@ -32,12 +32,18 @@ class Solution(object):
         q = head.next
         new_head = head.next
 
-        while p is not None and q is not None:
+        while q is not None and p.next is not None:
+            print '-'*15
             p.next = q.next
             q.next = p
-            p = p.next
-            q = p.next
-        print new_head.val
+            ll.travel_link(new_head)
+            if p.next is not None:
+                print '+'*15
+                p = p.next
+                q = p.next
+                ll.travel_link(new_head)
+
+        # print new_head.val
         return new_head
 
 
@@ -45,16 +51,21 @@ if __name__ == '__main__':
     s = Solution()
 
     head = ll.creat_link([1, 2])
-    # ll.travel_link(head)
+    ll.travel_link(head)
     head1 = s.swapPairs(head)
     ll.travel_link(head1)
+    #
+    # head = ll.creat_link([1, 2, 3])
+    # ll.travel_link(head)
+    # head1 = s.swapPairs(head)
+    # ll.travel_link(head1)
 
-    head = ll.creat_link([1, 2, 3])
-    # ll.travel_link(head)
+    head = ll.creat_link([1, 2, 3, 4])
+    ll.travel_link(head)
     head1 = s.swapPairs(head)
     ll.travel_link(head1)
-
-    headead = ll.creat_link([1, 2, 3, 4, 5, 6, 7])
+    #
+    # head = ll.creat_link([1, 2, 3, 4, 5, 6, 7])
     # ll.travel_link(head)
-    head1 = s.swapPairs(head)
-    ll.travel_link(head1)
+    # head1 = s.swapPairs(head)
+    # ll.travel_link(head1)
