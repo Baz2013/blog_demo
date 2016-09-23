@@ -28,23 +28,17 @@ class Solution(object):
         if head is None:
             return
 
-        p = head
-        q = head.next
-        new_head = head.next
+        pre = self
+        pre.next = head
 
-        while q is not None and p.next is not None:
-            print '-'*15
-            p.next = q.next
-            q.next = p
-            ll.travel_link(new_head)
-            if p.next is not None:
-                print '+'*15
-                p = p.next
-                q = p.next
-                ll.travel_link(new_head)
+        while pre.next and pre.next.next:
+            p = pre.next
+            q = p.next
+            pre.next, q.next, p.next = q, p, q.next
+            pre = p
 
         # print new_head.val
-        return new_head
+        return self.next
 
 
 if __name__ == '__main__':
@@ -54,18 +48,18 @@ if __name__ == '__main__':
     ll.travel_link(head)
     head1 = s.swapPairs(head)
     ll.travel_link(head1)
-    #
-    # head = ll.creat_link([1, 2, 3])
-    # ll.travel_link(head)
-    # head1 = s.swapPairs(head)
-    # ll.travel_link(head1)
+
+    head = ll.creat_link([1, 2, 3])
+    ll.travel_link(head)
+    head1 = s.swapPairs(head)
+    ll.travel_link(head1)
 
     head = ll.creat_link([1, 2, 3, 4])
     ll.travel_link(head)
     head1 = s.swapPairs(head)
     ll.travel_link(head1)
     #
-    # head = ll.creat_link([1, 2, 3, 4, 5, 6, 7])
-    # ll.travel_link(head)
-    # head1 = s.swapPairs(head)
-    # ll.travel_link(head1)
+    head = ll.creat_link([1, 2, 3, 4, 5, 6, 7])
+    ll.travel_link(head)
+    head1 = s.swapPairs(head)
+    ll.travel_link(head1)
