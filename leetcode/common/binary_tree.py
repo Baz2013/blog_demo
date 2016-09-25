@@ -1,4 +1,7 @@
 # -*- coding:utf-8 -*-
+
+import Queue
+
 global LIST_POINT
 LIST_POINT = 0
 
@@ -41,6 +44,7 @@ def pre_order_travel(r_head):
     pre_order_travel(r_head.left)
     pre_order_travel(r_head.right)
 
+
 def mid_order_travel(r_head):
     """
     :param head:
@@ -52,6 +56,7 @@ def mid_order_travel(r_head):
     print r_head.val,
     mid_order_travel(r_head.right)
 
+
 def after_order_travel(r_head):
     """
     :param head:
@@ -62,6 +67,23 @@ def after_order_travel(r_head):
     after_order_travel(r_head.left)
     after_order_travel(r_head.right)
     print r_head.val,
+
+
+def level_order_traver(r_head):
+    """
+    二叉树层序遍历
+    :param r_head:
+    :return:
+    """
+    queue = Queue.Queue()
+    queue.put(r_head)
+    while queue.qsize() != 0:
+        node = queue.get()
+        print node.val,
+        if node.left is not None:
+            queue.put(node.left)
+        if node.right is not None:
+            queue.put(node.right)
 
 
 def modifyConstant():
@@ -80,6 +102,8 @@ if __name__ == '__main__':
     mid_order_travel(head)
     print
     after_order_travel(head)
+    print
+    level_order_traver(head)
     # modifyConstant()
     # modifyConstant()
     # modifyConstant()

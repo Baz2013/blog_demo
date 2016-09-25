@@ -26,6 +26,8 @@ import common.binary_tree as bt
 #         self.val = x
 #         self.left = None
 #         self.right = None
+import Queue
+
 
 class Solution(object):
     def levelOrderBottom(self, root):
@@ -33,6 +35,21 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[List[int]]
         """
+        if not root:
+            return
+        tmp = list()
+        queue = Queue.Queue()
+        queue.put(root)
+        while queue.qsize() != 0:
+            # t = list()
+            node = queue.get()
+            # t.append(node.val)
+            print node.val
+            if node.left is not None:
+                queue.put(node.left)
+            if node.right is not None:
+                queue.put(node.right)
+
 
 if __name__ == '__main__':
     s = Solution()
@@ -40,3 +57,5 @@ if __name__ == '__main__':
     # bt.pre_order_travel(root)
     # print
     # bt.mid_order_travel(root)
+    rst = s.levelOrderBottom(root)
+    # rst = bt.level_order_traver(root)
