@@ -24,9 +24,29 @@ class Solution(object):
         :type head: ListNode
         :rtype: bool
         """
+        if not head or not head.next:
+            return False
+        flag = True
+        slow = head
+        fast = head.next
+
+        while slow != fast:
+            if fast and fast.next:
+                fast = fast.next.next
+                slow = slow.next
+            else:
+                flag = False
+                break
+
+        return flag
 
 
 if __name__ == '__main__':
-    root = creat_link([])
+    root = create_link_with_cycle([1, 2, 3, 4, 5, 6, 7])
     s = Solution()
-    s.hasCycle(root)
+    print s.hasCycle(root)
+    root = create_link([1])
+    print s.hasCycle(root)
+
+    root = create_link([1, 2, 3])
+    print s.hasCycle(root)
