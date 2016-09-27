@@ -35,25 +35,31 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[List[int]]
         """
+        # import Queue
         if not root:
-            return
+            return []
         tmp = list()
         queue = Queue.Queue()
         queue.put(root)
         while queue.qsize() != 0:
-            # t = list()
-            node = queue.get()
-            # t.append(node.val)
-            print node.val
-            if node.left is not None:
-                queue.put(node.left)
-            if node.right is not None:
-                queue.put(node.right)
+            level = []
+            len = queue.qsize()
+            for i in range(len):
+                front = queue.get()
+                level.append(front.val)
+                if front.left:
+                    queue.put(front.left)
+                if front.right:
+                    queue.put(front.right)
+
+            tmp.insert(0, level)
+        return tmp
 
 
 if __name__ == '__main__':
     s = Solution()
-    root = bt.creat_binary_tree([3, 9, '*', '*', 20, 15, '*', '*', 7, '*', '*'])
+    # root = bt.creat_binary_tree([3, 9, '*', '*', 20, 15, '*', '*', 7, '*', '*'])
+    root = bt.creat_binary_tree([6, 2, 0, '*', '*', 4, 3, '*', '*', 5, '*', '*', 8, 7, '*', '*', 9, '*', '*'])
     # bt.pre_order_travel(root)
     # print
     # bt.mid_order_travel(root)

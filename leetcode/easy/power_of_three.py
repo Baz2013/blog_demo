@@ -30,3 +30,4 @@ if __name__ == '__main__':
     print s.isPowerOfThree(27)
     print s.isPowerOfThree(99)
     print s.isPowerOfThree(243)
+    # isinstance()
