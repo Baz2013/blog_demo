@@ -30,6 +30,8 @@
 #         self.right = None
 
 import common.binary_tree as bt
+import common.generator_tool as gt
+import time
 
 
 class Solution(object):
@@ -57,6 +59,7 @@ class Solution(object):
 
         return self.symmetric(root.left, root.right)
 
+    @gt.benchmark
     def isSymmetric_1(self, root):
         """
         非递归方法
