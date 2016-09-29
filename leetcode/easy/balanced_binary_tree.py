@@ -13,15 +13,41 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
+import common.binary_tree as bt
+
 
 class Solution(object):
+    def depth(self, root):
+        """
+        :param root:
+        :return:
+        """
+        if not root:
+            return 0
+        left_depth = self.depth(root.left)
+        right_depth = self.depth(root.right)
+
+        return 1 + (left_depth if left_depth > right_depth else right_depth)
+
     def isBalanced(self, root):
         """
         :type root: TreeNode
         :rtype: bool
         """
+        if not root:
+            return True
+        l_depth = self.depth(root.left)
+        r_depth = self.depth(root.right)
+
+        if abs(l_depth - r_depth) > 1:
+            return False
+        else:
+            return self.isBalanced(root.left) and self.isBalanced(root.right)
 
 
 if __name__ == '__main__':
+    # root = bt.creat_binary_tree([6, 2, 0, '*', '*', 4, 3, '*', '*', 5, '*', '*', 8, 7, '*', '*', 9, '*', '*'])
+    root = bt.creat_binary_tree([1, 2, 4, 6, '*', '*', '*', 5, '*', '*', 3, '*', '*'])
     s = Solution()
-    # s.isBalanced()
+    print s.depth(root)
+    print s.isBalanced(root)
