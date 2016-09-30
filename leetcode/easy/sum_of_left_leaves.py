@@ -43,7 +43,7 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        
+
         return sum
 
 
