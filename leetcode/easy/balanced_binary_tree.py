@@ -46,8 +46,8 @@ class Solution(object):
 
 
 if __name__ == '__main__':
-    # root = bt.creat_binary_tree([6, 2, 0, '*', '*', 4, 3, '*', '*', 5, '*', '*', 8, 7, '*', '*', 9, '*', '*'])
-    root = bt.creat_binary_tree([1, 2, 4, 6, '*', '*', '*', 5, '*', '*', 3, '*', '*'])
+    root = bt.creat_binary_tree([6, 2, 0, '*', '*', 4, 3, '*', '*', 5, '*', '*', 8, 7, '*', '*', 9, '*', '*'])
+    # root = bt.creat_binary_tree([1, 2, 4, 6, '*', '*', '*', 5, '*', '*', 3, '*', '*'])
     s = Solution()
     print s.depth(root)
     print s.isBalanced(root)
