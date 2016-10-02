@@ -34,7 +34,21 @@ class Solution(object):
         :type num: int
         :rtype: str
         """
+        letters = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f')
+        ret = ''
+        if num == 0:
+            return '0'
+        if num < 0:
+            num += 2 ** 32
+
+        while num > 0:
+            num, val = divmod(num, 16)
+            ret += letters[val]
+
+        return ret[::-1]
+
 
 if __name__ == '__main__':
     s = Solution()
-    s.toHex(26)
+    print s.toHex(26)
+    print s.toHex(-1)
