@@ -47,8 +47,26 @@ class Solution(object):
 
         return ret[::-1]
 
+    def toHex_1(self, num):
+        """
+        :type num: int
+        :rtype: str
+        """
+        letters = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f')
+        ret = ''
+        if num == 0:
+            return '0'
+        if num < 0:
+            num += 2 ** 32
+
+        while num != 0:
+            ret = letters[num & 15] + ret
+            num >>= 4
+
+        return ret
+
 
 if __name__ == '__main__':
     s = Solution()
-    print s.toHex(26)
-    print s.toHex(-1)
+    print s.toHex_1(26)
+    print s.toHex_1(-1)
