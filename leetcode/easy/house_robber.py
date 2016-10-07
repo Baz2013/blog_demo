@@ -8,6 +8,7 @@
 #
 # Given a list of non-negative integers representing the amount of money of each house,
 # determine the maximum amount of money you can rob tonight without alerting the police.
+# 动态规划问题
 
 class Solution(object):
     def rob(self, nums):
@@ -15,8 +16,18 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        last, now = 0, 0
+        for i in nums:
+            print 'last = %d,now = %d, i = %d' % (last, now, i)
+            last, now = now, max(last + i, now)
+
+        return now
 
 
 if __name__ == '__main__':
     s = Solution()
-    s.rob([1, 2, 3, 4, 5, 6])
+    print s.rob([1, 2, 3, 4, 5, 6])
+    print '-' * 20
+    print s.rob([1, 2, 3, 4, 99, 6])
+    print '-' * 20
+    print s.rob([1, 1, 1, 98, 99, 1])
