@@ -18,7 +18,7 @@ class Solution(object):
         """
         last, now = 0, 0
         for i in nums:
-            print 'last = %d,now = %d, i = %d' % (last, now, i)
+            # print 'last = %d,now = %d, i = %d' % (last, now, i)
             last, now = now, max(last + i, now)
 
         return now
