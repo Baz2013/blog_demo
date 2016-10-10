@@ -20,6 +20,7 @@ class Queue(object):
         """
         initialize your data structure here.
         """
+        self.stack = []
 
     def push(self, x):
         """
@@ -45,3 +46,4 @@ class Queue(object):
 
 if __name__ == '__main__':
     s = Queue()
+    s.empty()
