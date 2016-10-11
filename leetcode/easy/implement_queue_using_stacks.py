@@ -27,23 +27,35 @@ class Queue(object):
         :type x: int
         :rtype: nothing
         """
+        self.stack.append(x)
 
     def pop(self):
         """
         :rtype: nothing
         """
+        return self.stack.pop(0)
 
     def peek(self):
         """
         :rtype: int
         """
+        return None if len(self.stack) == 0 else self.stack[0]
 
     def empty(self):
         """
         :rtype: bool
         """
+        return True if len(self.stack) == 0 else False
 
 
 if __name__ == '__main__':
     s = Queue()
-    s.empty()
+    print s.empty()
+    s.push(1)
+    s.push(2)
+    s.push(3)
+    print s.pop()
+    print s.pop()
+    print s.pop()
+    print s.empty()
+    print s.peek()
