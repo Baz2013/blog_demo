@@ -20,6 +20,10 @@ class Solution(object):
         :type num2: str
         :rtype: str
         """
+        len1 = len(num1)
+        len2 = len(num2)
+        if len1 > len2:
+            while 
 
 
 if __name__ == '__main__':
