@@ -22,8 +22,34 @@ class Solution(object):
         :type numRows: int
         :rtype: List[List[int]]
         """
+        res = []
+        if numRows == 0:
+            return res
+        elif numRows == 1:
+            res.append([1])
+            return res
+        else:
+            res.append([1])
+            res.append([1, 1])
+        i = 2
+        while i < numRows:
+            tmp = list()
+            tmp.append(1)
+            pre_lst = res[i - 1]
+            for n in range(len(pre_lst)):
+                if n + 1 <= len(pre_lst) - 1:
+                    tmp.append(pre_lst[n] + pre_lst[n + 1])
+                else:
+                    tmp.append(1)
+            res.append(tmp)
+            i += 1
+
+        return res
 
 
 if __name__ == '__main__':
     s = Solution()
     print s.generate(5)
+    print s.generate(2)
+    print s.generate(1)
+    print s.generate(0)
