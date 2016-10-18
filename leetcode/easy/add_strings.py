@@ -20,12 +20,27 @@ class Solution(object):
         :type num2: str
         :rtype: str
         """
-        len1 = len(num1)
-        len2 = len(num2)
-        if len1 > len2:
-            while
+        i = len(num1) - 1
+        j = len(num2) - 1
+        carry = 0
+        res = []
+        while i >= 0 or j >= 0:
+            x = 0 if i < 0 else int(num1[i])
+            y = 0 if j < 0 else int(num2[j])
+            res.append((x + y + carry) % 10)
+            carry = (x + y + carry) / 10
+            i -= 1
+            j -= 1
+
+        if carry > 0:
+            res.append(carry)
+
+        res.reverse()
+        return ''.join([str(i) for i in res])
 
 
 if __name__ == '__main__':
     s = Solution()
-    s.addStrings('123', '456')
+    print s.addStrings('123', '456')
+    print s.addStrings('1', '456')
+    print s.addStrings('999999999999999999', '1')
