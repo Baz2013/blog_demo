@@ -19,8 +19,22 @@ class Solution(object):
         :type rowIndex: int
         :rtype: List[int]
         """
+        res = [1 for x in range(rowIndex + 1)]
+        i = 2
+        while i <= rowIndex:
+            k = i - 1
+            while k > 0:
+                res[k] = res[k] + res[k - 1]
+                k -= 1
+            i += 1
+
+        return res
 
 
 if __name__ == '__main__':
     s = Solution()
     print s.getRow(3)
+    print s.getRow(0)
+    print s.getRow(1)
+    print s.getRow(2)
+    print s.getRow(5)
