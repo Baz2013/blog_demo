@@ -34,12 +34,19 @@ class Solution:
         :param root:
         :return:
         """
+        if not root:
+            return []
+        res = [str(root.val) + "->" + path for path in self.binaryTreePaths(root.left)]
+        res += [str(root.val) + "->" + path for path in self.binaryTreePaths(root.right)]
+
+        return res or [str(root.val)]
 
 
 if __name__ == '__main__':
-    root = bt.creat_binary_tree([1, 2, '*', 5, '*', '*', 3, '*', '*'])
+    # root = bt.creat_binary_tree([1, 2, '*', 5, '*', '*', 3, '*', '*'])
+    root = bt.creat_binary_tree([6, 2, 0, '*', '*', 4, 3, '*', '*', 5, '*', '*', 8, 7, '*', '*', 9, '*', '*'])
     # bt.level_order_traver(root)
     # print
     # bt.after_order_travel(root)
     s = Solution()
-    s.binaryTreePaths(root)
+    print s.binaryTreePaths(root)
