@@ -52,3 +52,4 @@ if __name__ == '__main__':
     print s.longestPalindrome('ab')
     print s.longestPalindrome('abcd')
     print s.longestPalindrome('abcdc')
+    print s.longestPalindrome('')

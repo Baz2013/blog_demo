@@ -15,7 +15,7 @@ class TreeNode(object):
 
 def creat_binary_tree(r_data_lst):
     """
-    根据数据列表创建二叉树
+    根据数据列表创建二叉树,列表为二叉树的先序序列,空节点用'*'表示,叶子节点后边跟两个'*'
     :param r_data_lst:
     :return: 头结点
     """
