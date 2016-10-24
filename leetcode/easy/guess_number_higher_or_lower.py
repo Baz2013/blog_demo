@@ -30,6 +30,10 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
+        if not isinstance(n, int):
+            return
+
+        return n
 
 
 if __name__ == '__main__':
