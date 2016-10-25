@@ -36,15 +36,22 @@ class Solution(object):
             return []
         res = []
         for path in self.get_all_path(root.left):
-            tmp = [str(root.val)]
-            tmp += path
+            tmp = [root.val]
+            # tmp += path
+            if isinstance(path, list):
+                tmp += path
+            else:
+                tmp.append(path)
             res.append(tmp)
         for path in self.get_all_path(root.right):
-            tmp = [str(root.val)]
-            tmp += path
+            tmp = [root.val]
+            if isinstance(path, list):
+                tmp += path
+            else:
+                tmp.append(path)
             res.append(tmp)
 
-        return res or [str(root.val)]
+        return res or [root.val]
 
     def hasPathSum(self, root, sum1):
         """
@@ -54,7 +61,9 @@ class Solution(object):
         """
         res = self.get_all_path(root)
         for p in res:
-            # print p
+            print p
+            if not isinstance(p, list):
+                p = [p]
             if reduce(lambda x, y: int(x) + int(y), p) == sum1:
                 return True
 
@@ -62,7 +71,8 @@ class Solution(object):
 
 
 if __name__ == '__main__':
-    root = bt.creat_binary_tree((5, 4, 11, 7, '*', '*', 2, '*', '*', '*', 8, 13, '*', '*', 4, '*', 1, '*', '*'))
+    # root = bt.creat_binary_tree((5, 4, 11, -7, '*', '*', 2, '*', '*', '*', 8, 13, '*', '*', 4, '*', 1, '*', '*'))
+    root = bt.creat_binary_tree([1, '*', '*'])
     # bt.level_order_traver(root)
     s = Solution()
     print s.hasPathSum(root, 22)
