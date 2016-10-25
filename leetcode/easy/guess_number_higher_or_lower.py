@@ -23,6 +23,19 @@
 # @param num, your guess
 # @return -1 if my number is lower, 1 if my number is higher, otherwise return 0
 # def guess(num):
+def guess(num):
+    """
+    :param num:
+    :return:
+    """
+    n = 5
+    if num > n:
+        return -1
+    elif num < n:
+        return 1
+    else:
+        return 0
+
 
 class Solution(object):
     def guessNumber(self, n):
@@ -33,7 +46,22 @@ class Solution(object):
         if not isinstance(n, int):
             return
 
-        return n
+        start = 1
+        end = n
+        while start + 1 < end:
+            t = (start + end) / 2
+            print '-----', t
+            res = guess(t)
+            if res > 0:
+                start = t + 1
+            elif res < 0:
+                end = t - 1
+            else:
+                return t
+        if guess(start) == 0:
+            return start
+        if guess(end) == 0:
+            return end
 
 
 if __name__ == '__main__':
