@@ -5,6 +5,13 @@ import Queue
 global LIST_POINT
 LIST_POINT = 0
 
+#         _______6______
+#        /              \
+#     ___2__          ___8__
+#    /      \        /      \
+#    0      _4       7       9
+#          /  \
+#          3   5
 
 class TreeNode(object):
     def __init__(self, x):
@@ -43,6 +50,32 @@ def pre_order_travel(r_head):
     print r_head.val,
     pre_order_travel(r_head.left)
     pre_order_travel(r_head.right)
+
+
+def no_curv_pre_order_travel(r_head):
+    """
+    非递归遍先序历二叉树
+    :param r_head:
+    :return:
+    """
+    if r_head is None:
+        return
+    stack = list()  # 用list模拟栈
+    res = list()
+    stack.append(r_head)
+    while len(stack) > 0:
+        node = stack.pop()
+        # print node.val
+        res.append(node.val)
+        if node.right and node.left:
+            stack.append(node.right)
+            stack.append(node.left)
+        elif node.left:
+            stack.append(node.left)
+        elif node.right:
+            stack.append(node.right)
+
+    return res
 
 
 def mid_order_travel(r_head):
@@ -97,13 +130,14 @@ if __name__ == '__main__':
     data = [6, 2, 0, '*', '*', 4, 3, '*', '*', 5, '*', '*', 8, 7, '*', '*', 9, '*', '*']
     head = creat_binary_tree(data)
     # print head.left.right.right.val
-    pre_order_travel(head)
-    print
-    mid_order_travel(head)
-    print
-    after_order_travel(head)
-    print
-    level_order_traver(head)
-    # modifyConstant()
-    # modifyConstant()
-    # modifyConstant()
+    # pre_order_travel(head)
+    # print
+    # mid_order_travel(head)
+    # print
+    # after_order_travel(head)
+    # print
+    # level_order_traver(head)
+    # # modifyConstant()
+    # # modifyConstant()
+    # # modifyConstant()
+    print no_curv_pre_order_travel(head)
