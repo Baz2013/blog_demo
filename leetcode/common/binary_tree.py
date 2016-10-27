@@ -5,6 +5,7 @@ import Queue
 global LIST_POINT
 LIST_POINT = 0
 
+
 #         _______6______
 #        /              \
 #     ___2__          ___8__
@@ -88,6 +89,14 @@ def mid_order_travel(r_head):
     mid_order_travel(r_head.left)
     print r_head.val,
     mid_order_travel(r_head.right)
+
+
+def no_curv_mid_order_travel(r_head):
+    """
+    中序非递归遍历二叉树
+    :param r_head:
+    :return:
+    """
 
 
 def after_order_travel(r_head):
