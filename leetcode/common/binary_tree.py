@@ -97,6 +97,10 @@ def no_curv_mid_order_travel(r_head):
     :param r_head:
     :return:
     """
+    if r_head is None:
+        return
+    stack = list()
+    res = list()
 
 
 def after_order_travel(r_head):
