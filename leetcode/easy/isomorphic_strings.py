@@ -51,3 +51,4 @@ class solutionTest(unittest.TestCase):
         self.assertEquals(False, s.isIsomorphic('foo', 'bar'))
         self.assertEquals(True, s.isIsomorphic('foo', 'add'))
         self.assertEquals(True, s.isIsomorphic('paper', 'title'))
+        self.assertEquals(True, s.isIsomorphic('pa', 'title'))
