@@ -88,3 +88,5 @@ ENV/
 # Rope project settings
 .ropeproject
 .idea/
+blog_demo.iml/
+algs4/exercise/out/
