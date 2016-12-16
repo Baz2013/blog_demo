@@ -7,15 +7,17 @@ import time
 import ConfigParser
 
 if os.name != 'nt':
-    sys.path.append('/cbss/app/user/gucb/pexpect')
+    sys.path.append('./pexpect')
 else:
     pass
 import pexpect
 import pxssh
 
+# 功能: 在一台主机操作多台远程主机(在配置文件中配置要操作的主机）,不要使用未测试的命令
 # 测试过的命令 pwd,ls,ll,ps -ef|grep test_kill|grep -v grep|awk '{print $2}'
 # nohup /path/to/test_kill.sh &
-# rm /path/to/a.txt
+# rm /path/to/a.txt , 尽量不要加 -r 参数
+# 依赖pexpect v3.1
 
 
 
