@@ -13,6 +13,11 @@ else:
 import pexpect
 import pxssh
 
+# 测试过的命令 pwd,ls,ll,ps -ef|grep test_kill|grep -v grep|awk '{print $2}'
+# nohup /path/to/test_kill.sh &
+# rm /path/to/a.txt
+
+
 
 def auto_ssh(r_user, r_passwd, r_host, r_cmd_list):
     """
@@ -31,6 +36,7 @@ def auto_ssh(r_user, r_passwd, r_host, r_cmd_list):
         ssh = pxssh.pxssh()
         ssh.login(r_host, r_user, r_passwd, login_timeout=1)
         for cmd in r_cmd_list:
+            # ssh.sendline(cmd + "|/bin/grep -v '^$'")
             ssh.sendline(cmd)
             ssh.prompt()
             # print ssh.before
@@ -84,6 +90,18 @@ def read_conf(r_conf_file):
     return res_lst
 
 
+def reunit_res(r_res):
+    """
+    :param r_res:
+    :return:
+    """
+    res = list()
+    for i in r_res[0].split('\r\n'):
+        res.append(i)
+
+    return res
+
+
 def exec_cmd(r_conf_list, r_cmd_str):
     """
     执行命令
@@ -91,6 +109,7 @@ def exec_cmd(r_conf_list, r_cmd_str):
     :param r_cmd_str: 输入的命令
     :return: 执行结果
     """
+    res = list()
     if 'scp' in r_cmd_str:
         items = r_cmd_str.split(' ')
         for host_info in r_conf_list:
@@ -99,9 +118,23 @@ def exec_cmd(r_conf_list, r_cmd_str):
         return 'success'
     else:
         for host_info in r_conf_list:
-            res = auto_ssh(host_info[1], host_info[2], host_info[0], [r_cmd_str])
-            print res
-        return
+            t_res = auto_ssh(host_info[1], host_info[2], host_info[0], [r_cmd_str])
+            t_res = reunit_res(t_res)
+            t_res.insert(0, '='*10 + host_info[0] + '='*10)
+            t_res.pop(1)
+            res.append(t_res)
+
+        return res
+
+
+def print_res(r_res):
+    """
+    :param r_res:
+    :return:
+    """
+    for i in r_res:
+        for j in i:
+            print j
 
 
 def main(r_conf_file):
@@ -117,11 +150,11 @@ def main(r_conf_file):
         # print ':' + input_str
         if input_str == 'quit' or input_str == 'exit' or input_str == 'bye':
             sys.exit(0)
-        elif input_str == '\n':
+        elif input_str == '\n' or input_str == '\r\n' or len(input_str) == 0:
             continue
 
         exec_res = exec_cmd(conf_list, input_str)
-        print exec_res
+        print_res(exec_res)
         time.sleep(0.1)
 
 
