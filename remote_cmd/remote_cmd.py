@@ -13,11 +13,12 @@ else:
 import pexpect
 import pxssh
 
+
 # 功能: 在一台主机操作多台远程主机(在配置文件中配置要操作的主机）,不要使用未测试的命令
 # 测试过的命令 pwd,ls,ll,ps -ef|grep test_kill|grep -v grep|awk '{print $2}'
 # nohup /path/to/test_kill.sh &
 # rm /path/to/a.txt , 尽量不要加 -r 参数
-# 依赖pexpect v3.1
+# 依赖pexpect v3.1 (换成pexpect-4.2.1执行速度更快些)
 
 
 
@@ -122,7 +123,7 @@ def exec_cmd(r_conf_list, r_cmd_str):
         for host_info in r_conf_list:
             t_res = auto_ssh(host_info[1], host_info[2], host_info[0], [r_cmd_str])
             t_res = reunit_res(t_res)
-            t_res.insert(0, '='*10 + host_info[0] + '='*10)
+            t_res.insert(0, '=' * 10 + host_info[0] + '=' * 10)
             t_res.pop(1)
             res.append(t_res)
 
@@ -157,7 +158,7 @@ def main(r_conf_file):
 
         exec_res = exec_cmd(conf_list, input_str)
         print_res(exec_res)
-        time.sleep(0.1)
+        # time.sleep(0.1) # pexpect-4.2.1 不需要sleep
 
 
 if __name__ == '__main__':
