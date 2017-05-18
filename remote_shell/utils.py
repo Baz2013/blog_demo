@@ -24,6 +24,7 @@ def read_config(r_config_file):
     key = ''
     for line in lines:
         line = line.strip('\n\r')
+        line = _strip_comment(line)
         if not line:
             continue
         if line.startswith('['):
@@ -34,6 +35,24 @@ def read_config(r_config_file):
             ret_rst[key] = lst
 
     return ret_rst
+
+
+def _strip_comment(r_line):
+    """
+    去掉注释
+    :param r_line:
+    :return:
+    """
+    if r_line.startswith('#'):
+        return None
+    index = r_line.find('#')
+    if index > 1:
+        line = r_line[:index]
+        line = line.strip(' ')
+    else:
+        line = r_line
+
+    return line
 
 
 def print_output(r_lst):
