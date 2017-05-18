@@ -15,7 +15,7 @@ import utils
 THREAD_LOCK = threading.Lock()
 
 
-class Execute(threading.Thread):
+class Executor(threading.Thread):
     """
     执行远程命令
     """
@@ -108,6 +108,7 @@ class Execute(threading.Thread):
             ssh.logout()
         except pxssh.ExceptionPxssh, e:
             print 'pxssh failed to login' + ':' + r_host
+            print 'exception info: %s' % (str(e))
             # self.logger.error('exception info: %s' % (str(e),)
 
         return result
@@ -150,7 +151,7 @@ def _exe_command(r_hosts_lst, r_module, r_user, r_password, r_command):
     queue = Queue.Queue()
 
     for host in r_hosts_lst:
-        thread = Execute(queue, 'thread:%s' % (host,), host, r_user, r_password, r_command, r_module)
+        thread = Executor(queue, 'thread:%s' % (host,), host, r_user, r_password, r_command, r_module)
         thread.start()
         thread_lst.append(thread)
 

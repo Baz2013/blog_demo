@@ -66,22 +66,22 @@ def get_hosts(r_config, r_dest):
     return rst
 
 
-def red_font(s):
+def red_font(r_str):
     """
     显示红字
-    :param s:
+    :param r_str:
     :return:
     """
-    return "%s[31;2m%s%s[0m" % (chr(27), s, chr(27))
+    return "%s[31;2m%s%s[0m" % (chr(27), r_str, chr(27))
 
 
-def green_font(s):
+def green_font(r_str):
     """
     显示绿字
-    :param s:
+    :param r_str:
     :return:
     """
-    return "%s[32;2m%s%s[0m" % (chr(27), s, chr(27))
+    return "%s[32;2m%s%s[0m" % (chr(27), r_str, chr(27))
 
 
 def split_copy_command(r_str):
@@ -92,12 +92,11 @@ def split_copy_command(r_str):
     """
     t_lst = re.split('=| ', r_str)
     lst = []
-    for s in t_lst:
-        if s not in ['src','','dest']:
-            lst.append(s)
+    for t_str in t_lst:
+        if t_str not in ['src', '', 'dest']:
+            lst.append(t_str)
 
     return lst
-
 
 
 if __name__ == '__main__':
