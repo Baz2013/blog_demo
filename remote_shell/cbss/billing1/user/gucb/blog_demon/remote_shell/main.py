@@ -12,7 +12,7 @@ from pexpect import pxssh
 
 import utils
 
-# THREAD_LOCK = threading.Lock()
+THREAD_LOCK = threading.Lock()
 
 
 class Executor(threading.Thread):
@@ -49,11 +49,11 @@ class Executor(threading.Thread):
         t_res = self.auto_ssh(self.user, self.password, self.host, [self.command])
         t_res = self.reunit_res(t_res)
         t_res.insert(0, utils.green_font('=' * 10 + self.host + '=' * 10 + 'success'))
-        # THREAD_LOCK.acquire()
+        THREAD_LOCK.acquire()
         # self.queue.put(
         #         '%s-%s-%s-%s' % (self.host, self.user, self.password, self.command))
         self.queue.put(t_res)
-        # THREAD_LOCK.release()
+        THREAD_LOCK.release()
 
     def exec_copy(self):
         """
@@ -67,14 +67,14 @@ class Executor(threading.Thread):
         lst = []
         if t_res:
             lst.append(utils.green_font('=' * 10 + self.host + '=' * 10 + 'success'))
-            # THREAD_LOCK.acquire()
+            THREAD_LOCK.acquire()
             self.queue.put(lst)
-            # THREAD_LOCK.release()
+            THREAD_LOCK.release()
         else:
             lst.append(utils.red_font('=' * 10 + self.host + '=' * 10 + 'fail'))
-            # THREAD_LOCK.acquire()
+            THREAD_LOCK.acquire()
             self.queue.put(lst)
-            # THREAD_LOCK.release()
+            THREAD_LOCK.release()
 
     def reunit_res(self, r_res):
         """
@@ -191,7 +191,7 @@ def _exe_command(r_hosts_lst, r_module, r_user, r_password, r_command):
         thread_lst.append(thread)
 
     for thread in thread_lst:
-        thread.join(timeout=5)
+        thread.join()
 
         # while queue.qsize() != 0:
         #     # print queue.get(True)
@@ -222,4 +222,4 @@ def main(r_parser):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='''execute command or scripts on remote machine''')
     # parser.add_argument("-m", "--module", help="module", required=True)
-    main(parser)
+    # main(parser)

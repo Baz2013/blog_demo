@@ -1,9 +1,10 @@
 # -*- coding:utf-8 -*-
 """
 execute command or shell scripts on remote machine
+multi process version
 """
 import argparse
-import threading
+import multiprocessing
 import Queue
 import time
 
@@ -15,13 +16,14 @@ import utils
 # THREAD_LOCK = threading.Lock()
 
 
-class Executor(threading.Thread):
+class Executor(multiprocessing.Process):
     """
     执行远程命令
     """
 
     def __init__(self, queue, name, host, user, password, command, module, port=22):
-        threading.Thread.__init__(self, name=name)
+        # super(Executor, self).__init__()
+        multiprocessing.Process.__init__(self)
         self.name = name
         self.host = host
         self.user = user
@@ -41,6 +43,8 @@ class Executor(threading.Thread):
             self.exec_copy()
         elif self.module == 'shell':
             self.exec_copy()
+
+        return
 
     def exec_command(self):
         """
@@ -139,7 +143,7 @@ class Executor(threading.Thread):
         return True
 
 
-class Printer(threading.Thread):
+class Printer(multiprocessing.Process):
     """
     打印输出
     """
@@ -151,7 +155,8 @@ class Printer(threading.Thread):
         :param r_queue:
         :return:
         """
-        threading.Thread.__init__(self, name=r_name)
+        # super(Printer, self).__init__()
+        multiprocessing.Process.__init__(self)
         self.name = r_name
         self.count = r_count
         self.queue = r_queue
@@ -169,6 +174,8 @@ class Printer(threading.Thread):
                 i += 1
             self.queue.task_done()
 
+        return
+
 
 def _exe_command(r_hosts_lst, r_module, r_user, r_password, r_command):
     """
@@ -183,15 +190,16 @@ def _exe_command(r_hosts_lst, r_module, r_user, r_password, r_command):
     queue = Queue.Queue()
 
     p_thread = Printer('printer', len(r_hosts_lst), queue)
-    p_thread.start()
+    # p_thread.start()
     thread_lst.append(p_thread)
+    p_thread.start()
     for host in r_hosts_lst:
         thread = Executor(queue, 'thread:%s' % (host,), host, r_user, r_password, r_command, r_module)
-        thread.start()
         thread_lst.append(thread)
+        thread.start()
 
     for thread in thread_lst:
-        thread.join(timeout=5)
+        thread.join()
 
         # while queue.qsize() != 0:
         #     # print queue.get(True)
