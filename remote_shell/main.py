@@ -40,7 +40,20 @@ class Executor(threading.Thread):
         elif self.module == 'copy':
             self.exec_copy()
         elif self.module == 'shell':
-            self.exec_copy()
+            self.exec_copy()  # 先将脚本拷贝到远程主机
+            self.exec_shell()
+
+    def exec_shell(self):
+        """
+        执行脚本
+        :return:
+        """
+        # print "test shell function"
+        t_lst = utils.split_copy_command(self.command)
+        src_file = t_lst[0]
+        remote_path = t_lst[1]
+        self.command = "cd %s && sh %s" % (remote_path, src_file,)
+        self.exec_command()
 
     def exec_command(self):
         """
