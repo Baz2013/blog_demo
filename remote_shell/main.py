@@ -59,9 +59,16 @@ class Executor(threading.Thread):
         """
         :return:
         """
-        t_res = self.auto_ssh(self.user, self.password, self.host, [self.command])
+        t_command = self.command + '; echo $?'
+        t_res = self.auto_ssh(self.user, self.password, self.host, [t_command])
         t_res = self.reunit_res(t_res)
-        t_res.insert(0, utils.green_font('=' * 10 + self.host + '=' * 10 + 'success'))
+        t_status = t_res.pop()
+        # print 't_status:' + t_status
+        if t_status == '0':
+            txt = utils.green_font('=' * 10 + self.host + '=' * 10 + 'success')
+        else:
+            txt = utils.red_font('=' * 10 + self.host + '=' * 10 + 'fail')
+        t_res.insert(0, txt)
         # THREAD_LOCK.acquire()
         # self.queue.put(
         #         '%s-%s-%s-%s' % (self.host, self.user, self.password, self.command))
@@ -96,7 +103,10 @@ class Executor(threading.Thread):
         """
         res = list()
         for i in r_res[0].split('\r\n'):
-            res.append(i)
+            if i.strip(' ') == '':
+                continue
+            else:
+                res.append(i)
 
         return res
 
